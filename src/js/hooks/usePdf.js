@@ -29,7 +29,7 @@ export const usePdf = ({
   const [isAutorotate, setIsAutorotate] = useState(autorotate || false)
 
   // How long in ms does the page stays up before switching
-  const [autorotateDelay, setAutorotateDelay] = useState(500)
+  const [autorotateDelay, setAutorotateDelay] = useState(3000)
 
   useEffect(() => {
     // handleKeyboard event for PDF
@@ -102,6 +102,14 @@ export const usePdf = ({
     setIsAutorotate(isAutorotate => !isAutorotate)
   }
 
+  const increaseAutorotateDelay = () => {
+    setAutorotateDelay(delay => delay + 1000)
+  }
+
+  const decreaseAutorotateDelay = () => {
+    setAutorotateDelay(delay => Math.max(1000, delay - 1000))
+  }
+
   return {
     totalPages,
     currentPage,
@@ -113,6 +121,9 @@ export const usePdf = ({
     goLastPage,
     isAutorotate,
     toggleAutorotate,
-    displayToolbar
+    displayToolbar,
+    autorotateDelay,
+    increaseAutorotateDelay,
+    decreaseAutorotateDelay
   }
 }

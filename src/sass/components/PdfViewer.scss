@@ -3,18 +3,68 @@
     display: flex;
     justify-content: center;
   }
+
+  &page {
+    border: 1px solid $color-mid;
+  }
+
   &controls {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     height: 60px;
-    line-height: 60px;
+    display: flex;
+    flex-direction: column;
     background-color: $color-teal;
     box-shadow: $box-shadow;
+    align-items: center;
+    justify-content: center;
+
+    .material-icons {
+      vertical-align: middle;
+    }
 
     &.hidden {
       height: 0px;
+      visibility: hidden;
     }
+  }
+}
+
+.Controls {
+  display: flex;
+  color: #031838;
+
+  > div {
+    margin: 0 10px;
+    position: relative;
+  }
+}
+
+.Controls__pageSettings {
+  user-select: none;
+}
+
+.Controls__autorotate {
+  .label {
+    position: absolute;
+    top: -13px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+  }
+  .autorotate {
+    position: relative;
+    &.active {
+      animation: spin linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
 }

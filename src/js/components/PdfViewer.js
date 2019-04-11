@@ -3,15 +3,25 @@ import { Document, Page } from 'react-pdf'
 import classnames from 'classnames'
 
 import WindowSize from './WindowSize'
+import Controls from './Controls'
 import { usePdf } from 'js/hooks/usePdf'
 
 const PdfViewer = ({ fileRessource }) => {
   const {
     totalPages,
     currentPage,
-    onDocumentLoadSuccess,
+    isAutorotate,
     loading,
-    displayToolbar
+    displayToolbar,
+    onDocumentLoadSuccess,
+    goNextPage,
+    goPreviousPage,
+    goFirstPage,
+    goLastPage,
+    toggleAutorotate,
+    autorotateDelay,
+    increaseAutorotateDelay,
+    decreaseAutorotateDelay
   } = usePdf({})
   const controlsClasses = classnames(
     'PDF__controls',
@@ -39,7 +49,19 @@ const PdfViewer = ({ fileRessource }) => {
             <div className="PDF__loading" />
           ) : (
             <div className={controlsClasses}>
-              Page {currentPage} / {totalPages}
+              <Controls
+                goNextPage={goNextPage}
+                goPreviousPage={goPreviousPage}
+                goFirstPage={goFirstPage}
+                goLastPage={goLastPage}
+                totalPages={totalPages}
+                currentPage={currentPage}
+                toggleAutorotate={toggleAutorotate}
+                isAutorotate={isAutorotate}
+                autorotateDelay={autorotateDelay}
+                increaseAutorotateDelay={increaseAutorotateDelay}
+                decreaseAutorotateDelay={decreaseAutorotateDelay}
+              />
             </div>
           )}
         </>
