@@ -1,0 +1,37 @@
+// -------------------------- colors -------------------------- //
+
+$color-white: #ffffff;
+$color-main: #2e2e2e;
+$color-dark: #646464;
+$color-mid: #9a9a9a;
+$color-light: #f7f7f7;
+
+$color-border: #e8e8e8;
+$color-border--light: #f7f7f7;
+$color-border--dark: #d0d0d0;
+$color-border--very-dark: $color-dark;
+
+$color-background: #fff;
+
+$color-teal: #00b9af;
+$color-teal--light: #f5fcfc;
+$color-teal--mid: #7fdcd7;
+$color-teal--dark: #59a4a4;
+
+$color-green: #007373;
+$color-green--dark: darken($color-green, 3%);
+$color-green--mid: #59a4a4;
+$color-green--light: #b2d5d5;
+$color-green--mid-light: #cce3e3;
+$color-green--very-light: #d9eaea;
+
+$color-red: #d22b4c;
+$color-red--mid: #e06d84;
+$color-red--light: #e4bebe;
+
+// ---------------------------  box  --------------------------- //
+
+$box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025);
+$box-shadow--light: 0 1px 2px 0 rgba(0, 0, 0, 0.025);
+$box-shadow--active: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+$border-radius: 3px;

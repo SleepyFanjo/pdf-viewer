@@ -1,0 +1,16 @@
+.PDF__ {
+    &controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        line-height: 60px;
+        background-color: $color-teal;
+        box-shadow: $box-shadow;
+
+        &.hidden {
+            height: 0px;
+        }
+    }
+}
