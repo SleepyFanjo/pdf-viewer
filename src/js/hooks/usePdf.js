@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useInterval } from './useInterval'
 
-const KEY_C = "KeyC"
-const KEY_R = "KeyR"
-const RIGHT = "ArrowRight"
-const LEFT = "ArrowLeft"
-const DOWN = "ArrowDown"
-const UP = "ArrowUp"
+const KEY_C = 'KeyC'
+const KEY_R = 'KeyR'
+const RIGHT = 'ArrowRight'
+const LEFT = 'ArrowLeft'
+const DOWN = 'ArrowDown'
+const UP = 'ArrowUp'
 
 export const usePdf = ({
   totalPages: initialTotalPages,
@@ -14,26 +14,26 @@ export const usePdf = ({
   autorotate
 }) => {
   // Loading pdf state
-  const [ loading, setLoading ] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   // Display toolbar or not
-  const [ displayToolbar, setDisplayToolbar ] = useState(true)
+  const [displayToolbar, setDisplayToolbar] = useState(true)
 
   // PDF Maximum pages
-  const [ totalPages, setTotalPages ] = useState(initialTotalPages || null)
+  const [totalPages, setTotalPages] = useState(initialTotalPages || null)
 
   // PDF Current page
-  const [ currentPage, setCurrentPage ] = useState(initialCurrentPage || 1)
+  const [currentPage, setCurrentPage] = useState(initialCurrentPage || 1)
 
   // Does page switch automatically or not
-  const [ isAutorotate, setIsAutorotate ] = useState(autorotate || false)
+  const [isAutorotate, setIsAutorotate] = useState(autorotate || false)
 
   // How long in ms does the page stays up before switching
-  const [ autorotateDelay, setAutorotateDelay ] = useState(500)
+  const [autorotateDelay, setAutorotateDelay] = useState(500)
 
   useEffect(() => {
     // handleKeyboard event for PDF
-    const handleKeyboard = (e) => {
+    const handleKeyboard = e => {
       switch (e.code) {
         case KEY_C:
           setDisplayToolbar(!displayToolbar)
@@ -58,29 +58,36 @@ export const usePdf = ({
       }
     }
 
-    window.addEventListener("keydown", handleKeyboard)
+    window.addEventListener('keydown', handleKeyboard)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyboard)
+      window.removeEventListener('keydown', handleKeyboard)
     }
   }, [displayToolbar, totalPages])
 
-  useInterval(() => {
-    goNextPage()
-  }, isAutorotate ? autorotateDelay : null)
+  useInterval(
+    () => {
+      goNextPage()
+    },
+    isAutorotate ? autorotateDelay : null
+  )
 
-  const onDocumentLoadSuccess = ({numPages}) => {
+  const onDocumentLoadSuccess = ({ numPages }) => {
     setTotalPages(numPages)
     setCurrentPage(1)
     setLoading(false)
   }
 
   const goNextPage = () => {
-    setCurrentPage(currentPage => (currentPage + 1 > totalPages) ? 1 : (currentPage + 1))
+    setCurrentPage(currentPage =>
+      currentPage + 1 > totalPages ? 1 : currentPage + 1
+    )
   }
 
   const goPreviousPage = () => {
-    setCurrentPage(currentPage => (currentPage - 1 > 0) ? (currentPage - 1) : totalPages)
+    setCurrentPage(currentPage =>
+      currentPage - 1 > 0 ? currentPage - 1 : totalPages
+    )
   }
 
   const goFirstPage = () => {

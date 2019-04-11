@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import WindowSize from './WindowSize'
 import { usePdf } from 'js/hooks/usePdf'
 
-const PdfViewer = ({fileRessource}) => {
+const PdfViewer = ({ fileRessource }) => {
   const {
     totalPages,
     currentPage,
@@ -13,13 +13,15 @@ const PdfViewer = ({fileRessource}) => {
     loading,
     displayToolbar
   } = usePdf({})
-  const controlsClasses = classnames("PDF__controls", displayToolbar ? null : "hidden")
+  const controlsClasses = classnames(
+    'PDF__controls',
+    displayToolbar ? null : 'hidden'
+  )
 
   return (
     <WindowSize>
-      {
-        ({height}) => (
-          <>
+      {({ height }) => (
+        <>
           <Document
             file={fileRessource}
             onLoadSuccess={onDocumentLoadSuccess}
@@ -33,16 +35,15 @@ const PdfViewer = ({fileRessource}) => {
               height={height - (displayToolbar ? 50 : 0)}
             />
           </Document>
-          {
-            loading
-            ? <div className="PDF__loading" />
-            : <div className={controlsClasses}>
-              Page { currentPage } / { totalPages }
+          {loading ? (
+            <div className="PDF__loading" />
+          ) : (
+            <div className={controlsClasses}>
+              Page {currentPage} / {totalPages}
             </div>
-          }
-          </>
-        )
-      }
+          )}
+        </>
+      )}
     </WindowSize>
   )
 }

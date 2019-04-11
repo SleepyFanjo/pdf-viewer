@@ -4,7 +4,7 @@ import React from 'react'
 import debounce from 'debounce'
 
 export default class WindowSize extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -15,12 +15,12 @@ export default class WindowSize extends React.Component {
     this.resize = debounce(this.resize, 200)
   }
 
-  componentDidMount () {
-    window.addEventListener("resize", this.resize)
+  componentDidMount() {
+    window.addEventListener('resize', this.resize)
   }
 
-  componentWillUnmount () {
-    window.removeEventListener("resize", this.resize)
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize)
   }
 
   resize = () => {
@@ -30,7 +30,7 @@ export default class WindowSize extends React.Component {
     })
   }
 
-  render () {
+  render() {
     return this.props.children(this.state)
   }
 }

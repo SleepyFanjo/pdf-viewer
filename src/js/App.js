@@ -3,9 +3,7 @@ import PdfViewer from 'js/components/PdfViewer'
 
 class App extends Component {
   render() {
-    return (
-      <PdfViewer fileRessource="/BlackHoles.pdf" />
-    )
+    return <PdfViewer fileRessource="/BlackHoles.pdf" />
   }
 }
 
