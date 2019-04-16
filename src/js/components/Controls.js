@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import classnames from 'classnames'
 
 import DocumentContext from 'js/data/document-context'
+import Loader from './Loader'
 
 const Controls = ({
   currentPage,
@@ -21,7 +22,7 @@ const Controls = ({
     isAutorotate ? 'active' : 'inactive'
   )
 
-  const { updateFile } = useContext(DocumentContext)
+  const { updateFile, loading } = useContext(DocumentContext)
 
   return (
     <div className="Controls">
@@ -65,7 +66,22 @@ const Controls = ({
         </i>
       </div>
       <div className="Controls__fileupload">
-        <input type="file" onChange={updateFile} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <input
+              id="file"
+              type="file"
+              onChange={updateFile}
+              name="file"
+              className="file_input"
+            />
+            <label for="file" className="file_label">
+              <i className="material-icons">backup</i>
+            </label>
+          </>
+        )}
       </div>
     </div>
   )

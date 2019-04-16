@@ -55,11 +55,24 @@
     text-align: center;
     font-size: 12px;
   }
-  .autorotate {
-    position: relative;
-    &.active {
-      animation: spin linear infinite;
-    }
+}
+
+.Controls__fileupload {
+  .file_input {
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+  }
+
+  .file_label {
+    cursor: pointer;
+  }
+}
+
+.autorotate {
+  position: relative;
+  &.active {
+    animation: spin linear infinite;
   }
 }
 

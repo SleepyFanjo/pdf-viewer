@@ -10,7 +10,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      fileRessource: '/BlackHoles.pdf'
+      fileRessource: '/BlackHoles.pdf',
+      loading: false
     }
   }
 
@@ -25,9 +26,11 @@ class App extends Component {
         fileRessource: file
       })
     } else {
+      this.setState({ loading: true })
       uploadFileToConverter(file).then(file => {
         this.setState({
-          fileRessource: file
+          fileRessource: file,
+          loading: false
         })
       })
     }
