@@ -15,8 +15,7 @@ app.post('/convert', function(req, res) {
       file.path = __dirname + '/' + file.name
     })
     .on('file', (name, file) => {
-      console.log(file.path)
-      exec('unoconv -f pdf ' + file.path).then(function(response) {
+      exec('unoconv -f pdf ' + file.path).then(response => {
         const pdfFileName = path.parse(file.path).name + '.pdf'
         res.writeHead(200, {
           'Content-Type': 'application/octet-stream',
