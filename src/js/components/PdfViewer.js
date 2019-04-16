@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Document, Page } from 'react-pdf'
 import classnames from 'classnames'
 
 import WindowSize from './WindowSize'
 import Controls from './Controls'
 import { usePdf } from 'js/hooks/usePdf'
+import DocumentContext from 'js/data/document-context'
 
-const PdfViewer = ({ fileRessource }) => {
+const PdfViewer = () => {
   const {
     totalPages,
     currentPage,
@@ -23,6 +24,9 @@ const PdfViewer = ({ fileRessource }) => {
     increaseAutorotateDelay,
     decreaseAutorotateDelay
   } = usePdf({})
+
+  const { fileRessource } = useContext(DocumentContext)
+
   const controlsClasses = classnames(
     'PDF__controls',
     displayToolbar ? null : 'hidden'

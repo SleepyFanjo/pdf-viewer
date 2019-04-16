@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import classnames from 'classnames'
+
+import DocumentContext from 'js/data/document-context'
 
 const Controls = ({
   currentPage,
@@ -18,6 +20,8 @@ const Controls = ({
     'material-icons icon-button autorotate',
     isAutorotate ? 'active' : 'inactive'
   )
+
+  const { updateFile } = useContext(DocumentContext)
 
   return (
     <div className="Controls">
@@ -59,6 +63,9 @@ const Controls = ({
         >
           add
         </i>
+      </div>
+      <div className="Controls__fileupload">
+        <input type="file" onChange={updateFile} />
       </div>
     </div>
   )
