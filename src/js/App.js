@@ -16,12 +16,7 @@ class App extends Component {
     }
   }
 
-  updateFile = e => {
-    const file = e.target.files && e.target.files[0]
-    if (!file) {
-      return
-    }
-
+  updateFile = file => {
     if (file.type === PDF_TYPE) {
       this.setState({
         fileRessource: file,
@@ -49,11 +44,21 @@ class App extends Component {
     }
   }
 
+  updateFileEvent = e => {
+    const file = e.target.files && e.target.files[0]
+    if (!file) {
+      return
+    }
+
+    this.updateFile(file)
+  }
+
   render() {
     return (
       <DocumentContext.Provider
         value={{
           ...this.state,
+          updateFileEvent: this.updateFileEvent,
           updateFile: this.updateFile
         }}
       >

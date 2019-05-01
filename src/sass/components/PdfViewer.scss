@@ -61,32 +61,38 @@ canvas.react-pdf__Page__canvas {
     margin: 0 10px;
     position: relative;
   }
-}
 
-.Controls__pageSettings {
-  user-select: none;
-}
+  .Controls__pageSettings {
+    user-select: none;
+  }
 
-.Controls__autorotate {
-  .label {
+  .Controls__autorotate {
+    .label {
+      position: absolute;
+      top: -13px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  .Controls__fileupload {
+    .file_input {
+      width: 0.1px;
+      height: 0.1px;
+      position: absolute;
+    }
+
+    .file_label {
+      cursor: pointer;
+    }
+  }
+
+  .Controls__uuid {
     position: absolute;
-    top: -13px;
-    left: 0;
-    right: 0;
-    text-align: center;
+    right: 2px;
     font-size: 12px;
-  }
-}
-
-.Controls__fileupload {
-  .file_input {
-    width: 0.1px;
-    height: 0.1px;
-    position: absolute;
-  }
-
-  .file_label {
-    cursor: pointer;
   }
 }
 

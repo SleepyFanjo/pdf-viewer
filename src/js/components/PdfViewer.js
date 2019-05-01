@@ -5,6 +5,7 @@ import classnames from 'classnames'
 import WindowSize from './WindowSize'
 import Controls from './Controls'
 import { usePdf } from 'js/hooks/usePdf'
+import { useWs } from 'js/hooks/useWs'
 import { DocumentContext, IMAGE_TYPE } from 'js/data/document-context'
 
 const PdfViewer = () => {
@@ -20,11 +21,23 @@ const PdfViewer = () => {
     goPreviousPage,
     goFirstPage,
     goLastPage,
+    goToPage,
     toggleAutorotate,
     autorotateDelay,
     increaseAutorotateDelay,
     decreaseAutorotateDelay
   } = usePdf({ fileRessource: fileRessource })
+
+  const { uuid, connectedToApi } = useWs({
+    goNextPage,
+    goPreviousPage,
+    goFirstPage,
+    goLastPage,
+    goToPage,
+    toggleAutorotate,
+    increaseAutorotateDelay,
+    decreaseAutorotateDelay
+  })
 
   const controlsClasses = classnames(
     'PDF__controls',
@@ -35,7 +48,7 @@ const PdfViewer = () => {
 
   return (
     <WindowSize>
-      {({ height, width }) => (
+      {({ height }) => (
         <>
           {fileType === IMAGE_TYPE ? (
             <div
@@ -74,6 +87,8 @@ const PdfViewer = () => {
                 autorotateDelay={autorotateDelay}
                 increaseAutorotateDelay={increaseAutorotateDelay}
                 decreaseAutorotateDelay={decreaseAutorotateDelay}
+                uuid={uuid}
+                connectedToApi={connectedToApi}
               />
             </div>
           )}

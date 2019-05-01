@@ -15,14 +15,16 @@ const Controls = ({
   isAutorotate,
   autorotateDelay,
   increaseAutorotateDelay,
-  decreaseAutorotateDelay
+  decreaseAutorotateDelay,
+  connectedToApi,
+  uuid
 }) => {
   const autorotateClasses = classnames(
     'material-icons icon-button autorotate',
     isAutorotate ? 'active' : 'inactive'
   )
 
-  const { updateFile, loading } = useContext(DocumentContext)
+  const { updateFileEvent, loading } = useContext(DocumentContext)
 
   return (
     <div className="Controls">
@@ -73,7 +75,7 @@ const Controls = ({
             <input
               id="file"
               type="file"
-              onChange={updateFile}
+              onChange={updateFileEvent}
               name="file"
               className="file_input"
             />
@@ -83,6 +85,11 @@ const Controls = ({
           </>
         )}
       </div>
+      {connectedToApi ? (
+        <div className="Controls__uuid">
+          <span className="icon-button">{uuid}</span>
+        </div>
+      ) : null}
     </div>
   )
 }

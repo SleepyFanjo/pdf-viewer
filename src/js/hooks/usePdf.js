@@ -9,6 +9,10 @@ const DOWN = 'ArrowDown'
 const UP = 'ArrowUp'
 
 export const usePdf = ({ fileRessource }) => {
+  /*
+   * States
+   */
+
   // Loading pdf state
   const [loading, setLoading] = useState(true)
 
@@ -26,6 +30,9 @@ export const usePdf = ({ fileRessource }) => {
 
   // How long in ms does the page stays up before switching
   const [autorotateDelay, setAutorotateDelay] = useState(3000)
+  /*
+   * Effects
+   */
 
   useEffect(() => {
     setCurrentPage(1)
@@ -73,6 +80,8 @@ export const usePdf = ({ fileRessource }) => {
     isAutorotate ? autorotateDelay : null
   )
 
+  // Functions to control the state
+
   const onDocumentLoadSuccess = all => {
     setTotalPages(all.numPages)
     setCurrentPage(1)
@@ -80,9 +89,7 @@ export const usePdf = ({ fileRessource }) => {
   }
 
   const goNextPage = () => {
-    setCurrentPage(currentPage =>
-      currentPage + 1 > totalPages ? 1 : currentPage + 1
-    )
+    setCurrentPage(curr => (curr + 1 > totalPages ? 1 : curr + 1))
   }
 
   const goPreviousPage = () => {
@@ -95,12 +102,20 @@ export const usePdf = ({ fileRessource }) => {
     setCurrentPage(1)
   }
 
+  const goToPage = page => {
+    if (page > 1 && page <= totalPages) {
+      setCurrentPage(page)
+    }
+  }
+
   const goLastPage = () => {
     setCurrentPage(totalPages || 1)
   }
 
-  const toggleAutorotate = () => {
-    setIsAutorotate(isAutorotate => !isAutorotate)
+  const toggleAutorotate = autorotate => {
+    setIsAutorotate(isAutorotate =>
+      autorotate !== undefined ? autorotate : !isAutorotate
+    )
   }
 
   const increaseAutorotateDelay = () => {
@@ -120,6 +135,7 @@ export const usePdf = ({ fileRessource }) => {
     goPreviousPage,
     goFirstPage,
     goLastPage,
+    goToPage,
     isAutorotate,
     toggleAutorotate,
     displayToolbar,
