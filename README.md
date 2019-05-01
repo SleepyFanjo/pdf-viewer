@@ -17,7 +17,7 @@ By default control bar is hidden, a default PDF document is displayed and autoro
 
 ### Features
 
-- Display PPT, PDF documents and images equally
+- Display PPT, PDF documents and images consistently
 - Full keyboard control or light UI
 - Autorotate, loop (goes back to 1st page after the last page)
 - Meant to be used for a video/tv setup
