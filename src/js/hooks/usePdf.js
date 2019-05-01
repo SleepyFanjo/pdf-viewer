@@ -8,12 +8,7 @@ const LEFT = 'ArrowLeft'
 const DOWN = 'ArrowDown'
 const UP = 'ArrowUp'
 
-export const usePdf = ({
-  totalPages: initialTotalPages,
-  currentPage: initialCurrentPage,
-  autorotate,
-  fileRessource
-}) => {
+export const usePdf = ({ fileRessource }) => {
   // Loading pdf state
   const [loading, setLoading] = useState(true)
 
@@ -21,13 +16,13 @@ export const usePdf = ({
   const [displayToolbar, setDisplayToolbar] = useState(false)
 
   // PDF Maximum pages
-  const [totalPages, setTotalPages] = useState(initialTotalPages || null)
+  const [totalPages, setTotalPages] = useState(null)
 
   // PDF Current page
-  const [currentPage, setCurrentPage] = useState(initialCurrentPage || 1)
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Does page switch automatically or not
-  const [isAutorotate, setIsAutorotate] = useState(autorotate || true)
+  const [isAutorotate, setIsAutorotate] = useState(true)
 
   // How long in ms does the page stays up before switching
   const [autorotateDelay, setAutorotateDelay] = useState(3000)
@@ -79,7 +74,6 @@ export const usePdf = ({
   )
 
   const onDocumentLoadSuccess = all => {
-    console.log(all)
     setTotalPages(all.numPages)
     setCurrentPage(1)
     setLoading(false)
