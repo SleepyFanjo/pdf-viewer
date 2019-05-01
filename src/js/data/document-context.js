@@ -1,5 +1,6 @@
 import { createContext } from 'react'
 
-const DocumentContext = createContext({})
+export const PDF_TYPE = 'application/pdf'
+export const IMAGE_TYPE = 'image/*'
 
-export default DocumentContext
+export const DocumentContext = createContext({})

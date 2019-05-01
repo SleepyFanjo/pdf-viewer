@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import classnames from 'classnames'
 
-import DocumentContext from 'js/data/document-context'
+import { DocumentContext } from 'js/data/document-context'
 import Loader from './Loader'
 
 const Controls = ({
@@ -52,7 +52,7 @@ const Controls = ({
           remove
         </i>
         <i
-          class={autorotateClasses}
+          className={autorotateClasses}
           onClick={toggleAutorotate}
           style={{ animationDuration: autorotateDelay / 1000 + 's' }}
         >
@@ -77,7 +77,7 @@ const Controls = ({
               name="file"
               className="file_input"
             />
-            <label for="file" className="file_label">
+            <label htmlFor="file" className="file_label">
               <i className="material-icons">backup</i>
             </label>
           </>

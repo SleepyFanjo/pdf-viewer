@@ -5,9 +5,10 @@ import classnames from 'classnames'
 import WindowSize from './WindowSize'
 import Controls from './Controls'
 import { usePdf } from 'js/hooks/usePdf'
-import DocumentContext from 'js/data/document-context'
+import { DocumentContext, IMAGE_TYPE } from 'js/data/document-context'
 
 const PdfViewer = () => {
+  const { fileRessource, fileType } = useContext(DocumentContext)
   const {
     totalPages,
     currentPage,
@@ -23,32 +24,40 @@ const PdfViewer = () => {
     autorotateDelay,
     increaseAutorotateDelay,
     decreaseAutorotateDelay
-  } = usePdf({})
-
-  const { fileRessource } = useContext(DocumentContext)
+  } = usePdf({ fileRessource: fileRessource })
 
   const controlsClasses = classnames(
     'PDF__controls',
     displayToolbar ? null : 'hidden'
   )
 
+  const pageClasses = classnames('PDF__page', displayToolbar ? 'smaller' : null)
+
   return (
     <WindowSize>
-      {({ height }) => (
+      {({ height, width }) => (
         <>
-          <Document
-            file={fileRessource}
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={null}
-            className="PDF__document"
-          >
-            <Page
-              pageNumber={currentPage}
+          {fileType === IMAGE_TYPE ? (
+            <div
+              className="PDF__image--wrapper"
+              style={{ height: height - (displayToolbar ? 60 : 0) }}
+            >
+              <img alt="" src={fileRessource} className="PDF__image" />
+            </div>
+          ) : (
+            <Document
+              file={fileRessource}
+              onLoadSuccess={onDocumentLoadSuccess}
               loading={null}
-              className="PDF__page"
-              height={height - (displayToolbar ? 50 : 0)}
-            />
-          </Document>
+              className="PDF__document"
+            >
+              <Page
+                pageNumber={currentPage}
+                loading={null}
+                className={pageClasses}
+              />
+            </Document>
+          )}
           {loading ? (
             <div className="PDF__loading" />
           ) : (

@@ -15,13 +15,23 @@ app.post('/convert', function(req, res) {
       file.path = __dirname + '/' + file.name
     })
     .on('file', (name, file) => {
-      exec('unoconv -f pdf ' + file.path).then(response => {
+      exec('unoconv -f pdf "' + file.path + '"').then(response => {
+        fs.unlink(file.path, err => {
+          if (err) throw err
+        })
         const pdfFileName = path.parse(file.path).name + '.pdf'
         res.writeHead(200, {
           'Content-Type': 'application/octet-stream',
           'Content-Disposition': 'attachment; filename=' + pdfFileName
         })
-        fs.createReadStream(__dirname + '/' + pdfFileName).pipe(res)
+        const stream = fs
+          .createReadStream(__dirname + '/' + pdfFileName)
+          .pipe(res)
+        stream.on('close', () => {
+          fs.unlink(__dirname + '/' + pdfFileName, err => {
+            if (err) throw err
+          })
+        })
       })
     })
 })

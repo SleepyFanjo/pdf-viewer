@@ -1,11 +1,16 @@
 .PDF__ {
+  &page {
+    width: 100vw;
+    height: 100vh;
+    padding: 5px;
+
+    &.smaller {
+      height: calc(100vh - 60px);
+    }
+  }
   &document {
     display: flex;
     justify-content: center;
-  }
-
-  &page {
-    border: 1px solid $color-mid;
   }
 
   &controls {
@@ -30,6 +35,22 @@
       visibility: hidden;
     }
   }
+}
+
+canvas.react-pdf__Page__canvas {
+  object-fit: contain;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.PDF__image--wrapper {
+  display: flex;
+}
+
+.PDF__image {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
 }
 
 .Controls {

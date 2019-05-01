@@ -11,13 +11,14 @@ const UP = 'ArrowUp'
 export const usePdf = ({
   totalPages: initialTotalPages,
   currentPage: initialCurrentPage,
-  autorotate
+  autorotate,
+  fileRessource
 }) => {
   // Loading pdf state
   const [loading, setLoading] = useState(true)
 
   // Display toolbar or not
-  const [displayToolbar, setDisplayToolbar] = useState(true)
+  const [displayToolbar, setDisplayToolbar] = useState(false)
 
   // PDF Maximum pages
   const [totalPages, setTotalPages] = useState(initialTotalPages || null)
@@ -26,10 +27,15 @@ export const usePdf = ({
   const [currentPage, setCurrentPage] = useState(initialCurrentPage || 1)
 
   // Does page switch automatically or not
-  const [isAutorotate, setIsAutorotate] = useState(autorotate || false)
+  const [isAutorotate, setIsAutorotate] = useState(autorotate || true)
 
   // How long in ms does the page stays up before switching
   const [autorotateDelay, setAutorotateDelay] = useState(3000)
+
+  useEffect(() => {
+    setCurrentPage(1)
+    setTotalPages(null)
+  }, [fileRessource])
 
   useEffect(() => {
     // handleKeyboard event for PDF
@@ -72,8 +78,9 @@ export const usePdf = ({
     isAutorotate ? autorotateDelay : null
   )
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setTotalPages(numPages)
+  const onDocumentLoadSuccess = all => {
+    console.log(all)
+    setTotalPages(all.numPages)
     setCurrentPage(1)
     setLoading(false)
   }

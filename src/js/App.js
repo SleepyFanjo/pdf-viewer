@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PdfViewer from 'js/components/PdfViewer'
-import DocumentContext from 'js/data/document-context'
+import { DocumentContext, PDF_TYPE, IMAGE_TYPE } from 'js/data/document-context'
 import { uploadFileToConverter } from 'js/data/file-uploader'
 
-const PDF_TYPE = 'application/pdf'
+const isImage = type => type.split('/')[0] === 'image'
 
 class App extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class App extends Component {
 
     this.state = {
       fileRessource: '/BlackHoles.pdf',
+      fileType: PDF_TYPE,
       loading: false
     }
   }
@@ -23,13 +24,25 @@ class App extends Component {
 
     if (file.type === PDF_TYPE) {
       this.setState({
-        fileRessource: file
+        fileRessource: file,
+        fileType: file.type
       })
-    } else {
+    } else if (isImage(file.type)) {
+      const reader = new FileReader()
       this.setState({ loading: true })
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.setState({
+          fileRessource: reader.result,
+          fileType: IMAGE_TYPE,
+          loading: false
+        })
+      }
+    } else {
       uploadFileToConverter(file).then(file => {
         this.setState({
           fileRessource: file,
+          fileType: PDF_TYPE,
           loading: false
         })
       })
