@@ -53,27 +53,35 @@ If no uuid is provided in the API, every client are targeted
 - `/api/nextPage/:uuid` 
 Goes to the next page
 <br>
+
 - `/api/previousPage/:uuid`
 Goes to the previous page
 <br>
+
 - `/api/lastPage/:uuid`
 Goes to the last page
 <br>
+
 - `/api/firstPage/:uuid`
 Goes to the first page
 <br>
+
 - `/api/toggleAutorotateOn/:uuid`
 Set the autorotate function on
 <br>
+
 - `/api/toggleAutorotateOff/:uuid`
 Set the autortate function off
 <br>
+
 - `/api/toggleAutorotate/:uuid`
 Toggle the autorotate function
 <br>
+
 - `/api/increaseAutorotateDelay/:uuid`
 Increase the autorotate delay by 1sec
 <br>
+
 - `/api/decreaseAutorotateDelay/:uuid`
 Decrease the autorotate delay by 2sec
 <br>
